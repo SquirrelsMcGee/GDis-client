@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { InputService } from '../chat-input/input-service';
+import { Message } from 'discord.js';
+import { first } from 'rxjs';
+import { ClientHttpService } from '../../services/client-http-service';
 
 @Component({
   selector: 'app-chat-messages',
@@ -8,23 +9,23 @@ import { InputService } from '../chat-input/input-service';
   styleUrl: './chat-messages.component.scss'
 })
 export class ChatMessagesComponent implements OnDestroy {
-  protected messages: string[] = [
-    'test',
-    'something',
-    'cool!'
-  ]
+  protected messages: Message[] = []
 
-  private sub: Subscription;
+  constructor(
+    private readonly clientService: ClientHttpService,
+  ) {
+    this.clientService.availableMessages.subscribe(msgs => {
+      this.messages = this.messages.concat(msgs);
+    });
 
-  constructor(private readonly inputService: InputService) {
-    this.sub = this.inputService.input.subscribe(this.handleMessage.bind(this));
+    this.clientService.getMessageHistory('PLACEHOLDER')
+      .pipe(first())
+      .subscribe((msgs) => {
+        msgs = msgs.sort((a, b) => a.createdTimestamp - b.createdTimestamp)
+        this.messages = this.messages.concat(msgs)
+      });
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
-
-  private handleMessage(msg: string): void {
-    this.messages.push(msg);
   }
 }

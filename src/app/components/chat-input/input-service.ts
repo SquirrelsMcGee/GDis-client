@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
+import { ClientHttpService } from "../../services/client-http-service";
 
 @Injectable()
 export class InputService {
@@ -7,13 +8,14 @@ export class InputService {
 
     private readonly inputSubject$: Subject<string>;
 
-    constructor() {
+    constructor(private readonly clientService: ClientHttpService) {
         this.inputSubject$ = new Subject<string>();
         this.input = this.inputSubject$;
     }
 
-    public sendMessage(msg: string) {
+    public sendMessage(msg: string, files: FileList | null = null) {
         this.inputSubject$.next(msg);
+        this.clientService.sendMessage('PLACEHOLDER', msg, files);
     }
 
 }

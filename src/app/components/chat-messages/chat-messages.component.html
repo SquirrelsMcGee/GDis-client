@@ -1,5 +1,5 @@
 <table>
-@for (message of messages; track $index) {
-    <tr>{{message}}</tr>
-}
+    @for (message of messages; track $index) {
+    <tr>{{message.content}}</tr>
+    }
 </table>

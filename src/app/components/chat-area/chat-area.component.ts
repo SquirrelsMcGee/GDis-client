@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClientHttpService } from '../../services/client-http-service';
 import { InputService } from '../chat-input/input-service';
 
 @Component({
@@ -6,7 +7,8 @@ import { InputService } from '../chat-input/input-service';
   templateUrl: './chat-area.component.html',
   styleUrl: './chat-area.component.scss',
   providers: [
-    InputService
+    InputService,
+    ClientHttpService
   ]
 })
 export class ChatAreaComponent {
