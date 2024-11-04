@@ -7,7 +7,7 @@ Rewritten 2k24 in Angular
 ## Requirements
 - You'll need the backend server Gdis-server https://github.com/SquirrelsMcGee/GDis-server
 
-## Building
+## Setup
 *This is what I did, your mileage may vary*
 
 - Use Node Version: `20.14.0`
