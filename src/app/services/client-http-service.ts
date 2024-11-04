@@ -28,7 +28,7 @@ export class ClientHttpService {
     this.messageHistory$ = new Subject<MessageResponse[]>();
     this.messageHistory = this.messageHistory$;
 
-    interval(500).subscribe(() => {
+    interval(1000).subscribe(() => {
       this.getMessages();
     })
   }
