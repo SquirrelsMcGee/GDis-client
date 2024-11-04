@@ -1,0 +1,39 @@
+name: Angular Build
+
+# {1}
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  angular:
+    name: Angular Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      # {2}
+      - name: Checkout the source code
+        uses: actions/checkout@v3
+
+      # {3}
+      - name: Setup Node.js $
+        uses: actions/setup-node@v3
+        with:
+          node-version: $
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      # {4}
+      - name: Install dependencies
+        run: npm i
+      # {5}
+      - name: Run tests
+        run: npm run test:ci
+      # {6}
+      - name: Build
+        run: npm run build
