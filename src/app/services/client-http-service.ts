@@ -1,23 +1,31 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Message } from 'discord.js';
 import { first, interval, Observable, Subject, tap } from "rxjs";
+
+export type MessageResponse = {
+  content: string;
+  createdTimestamp: number,
+  attachments: {
+    id: string;
+    proxyUrl: string
+  }[]
+}
 
 @Injectable()
 export class ClientHttpService {
   private static readonly API: string = 'http://localhost:4090';
 
-  public readonly availableMessages: Observable<Message[]>;
-  public readonly messageHistory: Observable<Message[]>;
+  public readonly availableMessages: Observable<MessageResponse[]>;
+  public readonly messageHistory: Observable<MessageResponse[]>;
 
-  private readonly availableMessages$: Subject<Message[]>;
-  private readonly messageHistory$: Subject<Message[]>;
+  private readonly availableMessages$: Subject<MessageResponse[]>;
+  private readonly messageHistory$: Subject<MessageResponse[]>;
 
   constructor(private readonly http: HttpClient) {
-    this.availableMessages$ = new Subject<Message[]>();
+    this.availableMessages$ = new Subject<MessageResponse[]>();
     this.availableMessages = this.availableMessages$;
 
-    this.messageHistory$ = new Subject<Message[]>();
+    this.messageHistory$ = new Subject<MessageResponse[]>();
     this.messageHistory = this.messageHistory$;
 
     interval(500).subscribe(() => {
@@ -49,12 +57,12 @@ export class ClientHttpService {
   public getMessageHistory(channelId: string) {
     let params = new HttpParams();
     params = params.set('channelId', channelId)
-    return this.http.get<Message[]>(`${ClientHttpService.API}/history`, { params })
+    return this.http.get<MessageResponse[]>(`${ClientHttpService.API}/history`, { params })
       .pipe(tap(msgs => this.messageHistory$.next(msgs)));
   }
 
   private getMessages(): void {
-    this.http.get<Message[]>(`${ClientHttpService.API}/messages`)
+    this.http.get<MessageResponse[]>(`${ClientHttpService.API}/messages`)
       .pipe(first()).subscribe(messages => {
         this.availableMessages$.next(messages);
       })

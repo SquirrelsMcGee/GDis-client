@@ -14,7 +14,7 @@ import { ChatMessagesComponent } from './components/chat-messages/chat-messages.
     AppComponent,
     ChatAreaComponent,
     ChatInputComponent,
-    ChatMessagesComponent
+    ChatMessagesComponent,
   ],
   imports: [
     BrowserModule,

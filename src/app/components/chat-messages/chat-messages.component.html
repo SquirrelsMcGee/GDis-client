@@ -1,5 +1,24 @@
-<table>
+<div id="message-area" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     @for (message of messages; track $index) {
-    <tr>{{message.content}}</tr>
+    <div class="message">
+        @if (message.content) {
+        <span>{{message.content}}</span>
+        }
+        @for (attachment of message.attachments; track $index) {
+        @if (attachment.proxyUrl && isImageOrVideo(attachment.proxyUrl); as attachmentType) {
+        @switch (attachmentType) {
+        @case ('image') {
+        <img [src]="attachment.proxyUrl" />
+        }
+        @case ('video') {
+        <video [src]="attachment.proxyUrl" [controls]="true"></video>
+        }
+        @case ('unknown') {
+        <a [href]="attachment.proxyUrl">{{attachment.id}}</a>
+        }
+        }
+        }
+        }
+    </div>
     }
-</table>
+</div>
