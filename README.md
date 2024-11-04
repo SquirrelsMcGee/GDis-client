@@ -5,8 +5,7 @@ My scuffed Discord bot UI
 Rewritten 2k24 in Angular
 
 ## Requirements
-- You'll need the backend server Gdis-server
-- TODO: add instructions and link repo :)
+- You'll need the backend server Gdis-server https://github.com/SquirrelsMcGee/GDis-server
 
 ## Building
 *This is what I did, your mileage may vary*
