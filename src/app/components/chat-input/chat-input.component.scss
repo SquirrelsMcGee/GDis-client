@@ -1,0 +1,12 @@
+:host {
+  height: 5em;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+}
+
+#textInput {
+  flex: 1;
+}

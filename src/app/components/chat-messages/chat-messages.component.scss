@@ -1,0 +1,25 @@
+:host {
+  overflow: hidden;
+  flex: 1;
+}
+
+img,
+video {
+  width: 50%;
+}
+
+#message-area {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  border: 1px solid;
+  border-radius: 0.5em;
+  margin: 0.1em;
+}

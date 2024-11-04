@@ -1,0 +1,4 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <input type="text" formControlName="input" />
+    <input type="file" #fileInput (change)="onFile($event)" />
+</form>
