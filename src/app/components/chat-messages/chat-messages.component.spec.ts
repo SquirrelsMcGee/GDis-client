@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AppModule } from '../../app.module';
+import { ClientHttpService } from '../../services/client-http-service';
+import { InputService } from '../chat-input/input-service';
 import { ChatMessagesComponent } from './chat-messages.component';
 
 describe('ChatMessagesComponent', () => {
@@ -8,9 +11,14 @@ describe('ChatMessagesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChatMessagesComponent]
+      imports: [AppModule],
+      declarations: [ChatMessagesComponent],
+      providers: [
+        InputService,
+        ClientHttpService
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ChatMessagesComponent);
     component = fixture.componentInstance;

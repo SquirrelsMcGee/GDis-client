@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AppModule } from '../../app.module';
+import { ClientHttpService } from '../../services/client-http-service';
+import { InputService } from '../chat-input/input-service';
 import { ChatAreaComponent } from './chat-area.component';
 
 describe('ChatAreaComponent', () => {
@@ -8,9 +11,14 @@ describe('ChatAreaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChatAreaComponent]
+      imports: [AppModule],
+      declarations: [ChatAreaComponent],
+      providers: [
+        InputService,
+        ClientHttpService
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ChatAreaComponent);
     component = fixture.componentInstance;
