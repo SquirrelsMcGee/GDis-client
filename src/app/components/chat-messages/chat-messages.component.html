@@ -1,4 +1,4 @@
-<div id="message-area" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+<div id="message-area">
     @for (message of messages; track $index) {
     <div class="message">
         @if (message.content) {

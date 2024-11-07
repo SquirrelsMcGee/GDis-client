@@ -1,0 +1,7 @@
+<div id="guilds-container">
+  @for (guild of guilds; track $index) {
+  <div class="guild-item" [ngClass]="selectedGuildId === guild.id ? 'selected' : ''" (click)="onGuildClick(guild.id)">
+    <img [src]="guild.iconUrl" [title]="guild.name" />
+  </div>
+  }
+</div>

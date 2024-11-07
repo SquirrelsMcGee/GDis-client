@@ -1,0 +1,8 @@
+<div id="channels-container">
+  @for(channel of channels; track $index) {
+  <div class="channel-item" [ngClass]="selectedChannelId === channel.id ? 'selected' : ''"
+    (click)="onChannelClick(channel.id)">
+    {{ channel.name }}
+  </div>
+  }
+</div>

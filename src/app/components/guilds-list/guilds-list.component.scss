@@ -1,0 +1,30 @@
+:host {
+  max-width: 80px;
+  min-width: 80px;
+}
+
+#guilds-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+
+  padding-top: 1em;
+}
+
+.guild-item {
+  width: 80%;
+  padding: 0.2em;
+
+  img {
+    width: 100%;
+    border-radius: 2em;
+    box-shadow: 0 0 0px 2px black;
+  }
+
+  &.selected {
+    img {
+      outline: 2px solid red;
+    }
+  }
+}

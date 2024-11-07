@@ -17,12 +17,17 @@ export class ChatMessagesComponent {
       this.messages = this.messages.concat(msgs);
     });
 
-    this.clientService.getMessageHistory('PLACEHOLDER')
-      .pipe(first())
-      .subscribe((msgs) => {
-        msgs = msgs.sort((a, b) => a.createdTimestamp - b.createdTimestamp)
-        this.messages = this.messages.concat(msgs)
-      });
+    this.clientService.selectedChannel.subscribe(channel => {
+      this.messages = [];
+      this.clientService.getMessageHistory(channel.id)
+        .pipe(first())
+        .subscribe((msgs) => {
+          msgs = msgs.sort((a, b) => a.createdTimestamp - b.createdTimestamp)
+          this.messages = this.messages.concat(msgs)
+        });
+    });
+
+
   }
 
 

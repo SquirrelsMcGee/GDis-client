@@ -1,0 +1,12 @@
+:host {
+  max-width: 200px;
+  min-width: 200px;
+}
+
+.channel-item {
+  padding: 0.2em;
+
+  &.selected {
+    outline: 2px solid red;
+  }
+}
